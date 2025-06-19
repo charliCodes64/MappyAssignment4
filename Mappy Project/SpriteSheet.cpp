@@ -81,7 +81,7 @@ void Sprite::UpdateSprites(int width, int height, int dir)
     }
 	if (animationDirection == 0)
 	{
-		if (collided(x, y + frameHeight)) { //collision detection to the left
+		if (collided(x + 38, y + frameHeight)) { //collision detection to the left
 			x = oldx;
 			y = oldy;
 		}
@@ -89,19 +89,19 @@ void Sprite::UpdateSprites(int width, int height, int dir)
 	}
 	else if (animationDirection == 1)
 	{
-		if (collided(x + frameWidth, y + frameHeight)) { //collision detection to the right
+		if (collided(x + frameWidth - 38, y + frameHeight)) { //collision detection to the right
 			x = oldx;
 			y = oldy;
 		}
 	}
 	else if (animationDirection == 3) {
-		if (collided(x + frameWidth / 2, y + 5)) {
+		if (collided(x + frameWidth / 2, y + 32)) {
 			x = oldx;
 			y = oldy;
 		}
 	}
 	else if (animationDirection == 4) {
-		if (collided(x + frameWidth / 2, y + frameHeight - 5)) {
+		if (collided(x + frameWidth / 2, y + frameHeight - 32)) {
 			x = oldx;
 			y = oldy;
 		}
@@ -110,7 +110,7 @@ void Sprite::UpdateSprites(int width, int height, int dir)
 
 bool Sprite::CollisionEndBlock()
 {
-	if (endValue(x + frameWidth / 2, y + frameHeight + 5))
+	if (endValue(x + frameWidth / 2 , y + frameHeight - 15))
 		return true;
 	else
 		return false;

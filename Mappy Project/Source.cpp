@@ -53,7 +53,7 @@ int main(void)
 
 	int xOff = 0;
 	int yOff = 0;
-	if (MapLoad("map1.FMP", 1))
+	if (MapLoad("map2.FMP", 1))
 		return -5;
 
 	event_queue = al_create_event_queue();
@@ -75,7 +75,7 @@ int main(void)
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
-    std:cout << "try25" << std::endl;
+    std:cout << "try27" << std::endl;
 	while (!done)
 	{
 		ALLEGRO_EVENT ev;

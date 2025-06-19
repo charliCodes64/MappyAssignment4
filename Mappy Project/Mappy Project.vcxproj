@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="map1.FMP" />
+    <None Include="map2.FMP" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

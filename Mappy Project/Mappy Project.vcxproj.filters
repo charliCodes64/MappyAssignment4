@@ -36,6 +36,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="map1.FMP" />
+    <None Include="map2.FMP" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="spinny0.bmp">
