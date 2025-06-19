@@ -95,6 +95,7 @@
   <ItemGroup>
     <None Include="map1.FMP" />
     <None Include="map2.FMP" />
+    <None Include="map3.FMP" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +106,9 @@
     <Image Include="spinny4.bmp" />
     <Image Include="spinny5.bmp" />
     <Image Include="spinnyAll.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="GoldenAge.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

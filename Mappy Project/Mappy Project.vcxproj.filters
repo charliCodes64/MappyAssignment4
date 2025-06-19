@@ -37,6 +37,7 @@
     <None Include="packages.config" />
     <None Include="map1.FMP" />
     <None Include="map2.FMP" />
+    <None Include="map3.FMP" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="spinny0.bmp">
@@ -60,5 +61,8 @@
     <Image Include="spinnyAll.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="GoldenAge.ttf" />
   </ItemGroup>
 </Project>

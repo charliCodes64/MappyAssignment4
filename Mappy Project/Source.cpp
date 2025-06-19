@@ -17,20 +17,23 @@ int main(void)
 	bool keys[] = { false, false, false, false, false };
 	enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 	//variables
-	bool winner = false;
 	bool done = false;
 	bool render = false;
+	bool levelOver = false;
+	bool gameOver = false;
 	//Player Variable
 	Sprite player;
+	int nextLev = 1;
 	int startTime = 60;
-
+	char name[80];
+	//sprintf(name, "map%i", nextLev);
 
 
 	//allegro variable
 	ALLEGRO_DISPLAY* display = NULL;
 	ALLEGRO_EVENT_QUEUE* event_queue = NULL;
 	ALLEGRO_TIMER* timer;
-	ALLEGRO_TIMER* game_timer;
+	ALLEGRO_TIMER* secCount;//timer for countdown
 	//program init
 	if (!al_init())										//initialize Allegro
 		return -1;
@@ -53,19 +56,19 @@ int main(void)
 
 	int xOff = 0;
 	int yOff = 0;
-	if (MapLoad("map2.FMP", 1))
+	if (MapLoad("map1.FMP", 1))//loads in map 1 as first map
 		return -5;
 
 	event_queue = al_create_event_queue();
 	timer = al_create_timer(1.0 / 60);
-	game_timer = al_create_timer(1.0);
+	secCount = al_create_timer(1.0);
 
 	al_register_event_source(event_queue, al_get_timer_event_source(timer));
-	al_register_event_source(event_queue, al_get_timer_event_source(game_timer));
+	al_register_event_source(event_queue, al_get_timer_event_source(secCount));
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
 
 	al_start_timer(timer);
-	al_start_timer(game_timer);
+	al_start_timer(secCount);
 	//draw the background tiles
 	MapDrawBG(xOff, yOff, 0, 0, WIDTH - 1, HEIGHT - 1);
 
@@ -75,17 +78,31 @@ int main(void)
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
-    std:cout << "try27" << std::endl;
+    std:cout << "try32" << std::endl;
 	while (!done)
 	{
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
 		if (ev.type == ALLEGRO_EVENT_TIMER)
 		{
-			if (ev.any.source == al_get_timer_event_source(game_timer))
-			{
-			
+				if (ev.timer.source == secCount) {
+					startTime--;
+					if (startTime <= 0) {
+						done = true;
+						gameOver = true;
+				}
 			}
+				if (levelOver == true) {
+					nextLev++;
+					startTime = 60;
+					levelOver = false;
+					sprintf(name, "map%i.FMP", nextLev);
+					if (MapLoad(name, 1)) exit(0);
+					if (nextLev < 4) {//setting spawn point
+						player.getX();
+						player.getY();
+					}
+				}
 
 			render = true;
 			if (keys[UP])
@@ -99,9 +116,9 @@ int main(void)
 			else
 				player.UpdateSprites(WIDTH, HEIGHT, 5);
 
-			if (player.CollisionEndBlock()) {//setting win to true
+			if (player.CollisionEndBlock()) {//setting levelOver to true
 				cout << "Hit an End Block\n";
-				winner = true;
+				levelOver = true;
 			}
 
 		}
@@ -128,7 +145,6 @@ int main(void)
 			case ALLEGRO_KEY_RIGHT:
 				keys[RIGHT] = true;
 				break;
-			
 
 			}
 		}
@@ -157,7 +173,7 @@ int main(void)
 		{
 			render = false;
 			//al_draw_filled_rectangle(0, 0, WIDTH, HEIGHT, al_map_rgb(75, 80, 100));
-
+ 
 			//update the map scroll position
 			xOff = player.getX() + player.getWidth() - WIDTH / 2;
 			yOff = player.getY() + player.getHeight() - HEIGHT / 2;
@@ -177,16 +193,32 @@ int main(void)
 			//draw foreground tiles
 			MapDrawFG(xOff, yOff, 0, 0, WIDTH, HEIGHT, 0);
 			//jump = player.jumping(jump, JUMPIT);
-			player.DrawSprites(xOff, yOff);
-			if (winner == true) {//win message 10sec delay
+			if (gameOver == true) {
+				al_draw_textf(font24, al_map_rgb(250, 50, 50), WIDTH / 2, HEIGHT / 2, ALLEGRO_ALIGN_CENTER, "OUT OF TIME TRY AGIAN!!");
 				al_flip_display();
 				al_rest(10);
 				done = true;
 			}
+			player.DrawSprites(xOff, yOff);
+			al_draw_textf(font24, al_map_rgb(75, 80, 100), 20, 2, ALLEGRO_ALIGN_LEFT, "Time: %d", startTime);//timer display
+
+			if (levelOver && nextLev == 3)
+			{
+				al_draw_textf(font24, al_map_rgb(50, 50, 255), WIDTH / 2, HEIGHT / 2, ALLEGRO_ALIGN_CENTER, "You Won!!");
+				al_flip_display();
+				al_rest(10);
+				done = true;
+			}
+			//if (winner == true) {//win message 10sec delay
+			//	al_flip_display();
+			//	al_rest(10);
+			//	done = true;
+			//}
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 		}
 	}
+ 
 	MapFreeMem();
 	al_destroy_event_queue(event_queue);
 	al_destroy_display(display);						//destroy our display object

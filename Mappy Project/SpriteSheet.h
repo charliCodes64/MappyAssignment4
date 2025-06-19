@@ -21,10 +21,11 @@ public:
 	int getHeight() {return frameHeight;}
 	int jumping(int jump, const int JUMPIT);
 	bool CollisionEndBlock();
-
-private:
 	float x;
 	float y;
+
+private:
+ 
 	float angle = 0.0f;
 	int maxFrame;
 	int curFrame;
