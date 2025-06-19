@@ -25,7 +25,7 @@ public:
 private:
 	float x;
 	float y;
-
+	float angle = 0.0f;
 	int maxFrame;
 	int curFrame;
 	int frameCount;

@@ -22,8 +22,8 @@ int main(void)
 	bool render = false;
 	//Player Variable
 	Sprite player;
-	const int JUMPIT = 1600;
-	int jump = JUMPIT;
+	//const int JUMPIT = 1600;
+	//int jump = JUMPIT;
 	int secondsElapsed = 0;
 
 
@@ -77,7 +77,7 @@ int main(void)
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
-std:cout << "try4" << std::endl;
+    std:cout << "try24" << std::endl;
 	while (!done)
 	{
 		ALLEGRO_EVENT ev;
@@ -92,15 +92,15 @@ std:cout << "try4" << std::endl;
 
 			render = true;
 			if (keys[UP])
-				;
+				player.UpdateSprites(WIDTH, HEIGHT, 3);
 			else if (keys[DOWN])
-				;
+				player.UpdateSprites(WIDTH, HEIGHT, 4);
 			else if (keys[LEFT])
 				player.UpdateSprites(WIDTH, HEIGHT, 0);
 			else if (keys[RIGHT])
 				player.UpdateSprites(WIDTH, HEIGHT, 1);
 			else
-				player.UpdateSprites(WIDTH, HEIGHT, 2);
+				player.UpdateSprites(WIDTH, HEIGHT, 5);
 
 			if (player.CollisionEndBlock()) {//setting win to true
 				cout << "Hit an End Block\n";
@@ -131,9 +131,7 @@ std:cout << "try4" << std::endl;
 			case ALLEGRO_KEY_RIGHT:
 				keys[RIGHT] = true;
 				break;
-			case ALLEGRO_KEY_SPACE:
-				keys[SPACE] = true;
-				jump = 30;
+			
 
 			}
 		}
@@ -155,9 +153,6 @@ std:cout << "try4" << std::endl;
 				break;
 			case ALLEGRO_KEY_RIGHT:
 				keys[RIGHT] = false;
-				break;
-			case ALLEGRO_KEY_SPACE:
-				keys[SPACE] = false;
 				break;
 			}
 		}
@@ -184,11 +179,11 @@ std:cout << "try4" << std::endl;
 			MapDrawBG(xOff, yOff, 0, 0, WIDTH, HEIGHT);
 			//draw foreground tiles
 			MapDrawFG(xOff, yOff, 0, 0, WIDTH, HEIGHT, 0);
-			jump = player.jumping(jump, JUMPIT);
+			//jump = player.jumping(jump, JUMPIT);
 			player.DrawSprites(xOff, yOff);
 			if (winner == true) {//win message 10sec delay
-				std::string win = "You won in " + std::to_string(secondsElapsed) + " seconds19";
-				al_draw_text(font24, al_map_rgb(80, 125, 70), WIDTH / 2, HEIGHT / 2, ALLEGRO_ALIGN_CENTER, win.c_str());
+				/*std::string win = "You won in " + std::to_string(secondsElapsed) + " seconds";
+				al_draw_text(font24, al_map_rgb(80, 125, 70), WIDTH / 2, HEIGHT / 2, ALLEGRO_ALIGN_CENTER, win.c_str());*/
 				al_flip_display();
 				al_rest(10);
 				done = true;

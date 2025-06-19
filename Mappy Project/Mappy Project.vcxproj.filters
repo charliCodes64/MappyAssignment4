@@ -36,4 +36,27 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="spinny0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="spinny1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="spinny2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="spinny3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="spinny4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="spinny5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="spinnyAll.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
