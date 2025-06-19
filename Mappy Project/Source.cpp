@@ -22,9 +22,7 @@ int main(void)
 	bool render = false;
 	//Player Variable
 	Sprite player;
-	//const int JUMPIT = 1600;
-	//int jump = JUMPIT;
-	int secondsElapsed = 0;
+	int startTime = 60;
 
 
 
@@ -55,7 +53,7 @@ int main(void)
 
 	int xOff = 0;
 	int yOff = 0;
-	if (MapLoad("sample.fmp", 1))
+	if (MapLoad("map1.FMP", 1))
 		return -5;
 
 	event_queue = al_create_event_queue();
@@ -77,7 +75,7 @@ int main(void)
 	al_flip_display();
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
-    std:cout << "try24" << std::endl;
+    std:cout << "try25" << std::endl;
 	while (!done)
 	{
 		ALLEGRO_EVENT ev;
@@ -86,8 +84,7 @@ int main(void)
 		{
 			if (ev.any.source == al_get_timer_event_source(game_timer))
 			{
-				if (!winner)
-					secondsElapsed++;
+			
 			}
 
 			render = true;
@@ -182,8 +179,6 @@ int main(void)
 			//jump = player.jumping(jump, JUMPIT);
 			player.DrawSprites(xOff, yOff);
 			if (winner == true) {//win message 10sec delay
-				/*std::string win = "You won in " + std::to_string(secondsElapsed) + " seconds";
-				al_draw_text(font24, al_map_rgb(80, 125, 70), WIDTH / 2, HEIGHT / 2, ALLEGRO_ALIGN_CENTER, win.c_str());*/
 				al_flip_display();
 				al_rest(10);
 				done = true;
